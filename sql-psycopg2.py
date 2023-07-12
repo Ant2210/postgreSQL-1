@@ -1,17 +1,9 @@
 import psycopg2
 import os
-import json
-
-# Get psql password from JSON file
-passes = []
-with open(".pgpass.json", "r") as json_data:
-    passes = json.load(json_data)
-
-pgpass = passes[0].get('pass')
-
+from postgres_settings import postgres_settings1 as settings
 
 # connect to "chinook" database
-connection = psycopg2.connect(database="chinook", password=pgpass)
+connection = psycopg2.connect(database=settings["db"], password=settings["pass"])
 
 # build a cursor object of the database
 cursor = connection.cursor()
@@ -35,10 +27,10 @@ cursor = connection.cursor()
 # cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Queen"])
 
 # Query 7 - Select all the tracks where the composer is "Black Sabbath" from the "Track" table
-# cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Black Sabbath"])
+cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Black Sabbath"])
 
 # Query 8 - Select all the tracks where the composer is "test" from the "Track" table - This is supposed to throw an error
-cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["test"])
+# cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["test"])
 
 # fetch the results (multiple)
 results = cursor.fetchall()
