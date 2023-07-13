@@ -26,16 +26,16 @@ class Programmer(base):
     famous_for = Column(String)
 
 
-# Instead of connecting to the database directly, we will ask for a session
-# Create a new instance of the sessionmaker, then point to our engine (the db)
+# # Instead of connecting to the database directly, we will ask for a session
+# # Create a new instance of the sessionmaker, then point to our engine (the db)
 Session = sessionmaker(db)
-# Opens an actual session by calling the Session() subclass defined above
+# # Opens an actual session by calling the Session() subclass defined above
 session = Session()
 
-# Creating the database using the declarative_base subclass
-base.metadata.create_all(db)
+# # Creating the database using the declarative_base subclass
+# base.metadata.create_all(db)
 
-# Create records on our "Programmer" table
+# # Create records on our "Programmer" table
 # ada_lovelace = Programmer(
 #     first_name = "Ada",
 #     last_name = "Lovelace",
@@ -93,6 +93,12 @@ base.metadata.create_all(db)
 # )
 
 # add each instance of our programmers to our session
+# session.add(ada_lovelace)
+# session.add(alan_turing)
+# session.add(grace_hopper)
+# session.add(margaret_hamilton)
+# session.add(bill_gates)
+# session.add(tim_berners_lee)
 # session.add(ant_griffiths)
 
 # # commit our session to the database
